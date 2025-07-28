@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Panel Bug</title>
+</head>
+<body style="background:black; color:lime; text-align:center; padding-top:100px;">
+  <h1>Halo Admin</h1>
+  <button onclick="triggerBug()">🔥 Kirim Bug API</button>
+
+  <script>
+    function triggerBug() {
+      fetch("https://httpbin.org/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ type: "bug_test", payload: "💣 CRASH" })
+      })
+      .then(res => res.json())
+      .then(json => {
+        alert("API Dikirim!\nResponse: " + JSON.stringify(json));
+        
+        // Simulasi efek bug berat
+        while (true) {
+          let div = document.createElement('div');
+          div.innerText = "🌪️ LAGGG";
+          document.body.appendChild(div);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
